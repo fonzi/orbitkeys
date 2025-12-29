@@ -1,0 +1,9 @@
+{
+  "app_id": "code",
+  "name": "Visual Studio Code",
+  "shortcuts": [
+    { "keys": "Ctrl+Shift+P", "desc": "Command Palette" },
+    { "keys": "Ctrl+P", "desc": "Quick Open File" },
+    { "keys": "Ctrl+B", "desc": "Toggle Sidebar" }
+  ]
+}

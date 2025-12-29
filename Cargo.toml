@@ -1,0 +1,17 @@
+[package]
+name = "orbitkeys"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Official COSMIC Protocols
+cosmic-protocols = { git = "https://github.com/pop-os/cosmic-protocols", features = ["client"] }
+
+# Standard Wayland Staging
+wayland-protocols = { version = "0.32", features = ["client", "staging"] }
+
+# Core Wayland
+wayland-client = "0.31"
+wayland-backend = "0.3"
+
+anyhow = "1.0"

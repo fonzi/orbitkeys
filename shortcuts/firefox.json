@@ -7,110 +7,49 @@
     "org.mozilla.firefox"
   ],
   "shortcuts": [
-    {
-      "keys": "Ctrl+L",
-      "desc": "Focus address bar",
-      "category": "Navigation"
-    },
-    {
-      "keys": "Ctrl+T",
-      "desc": "New tab",
-      "category": "Tabs"
-    },
-    {
-      "keys": "Ctrl+W",
-      "desc": "Close current tab",
-      "category": "Tabs"
-    },
-    {
-      "keys": "Ctrl+Shift+T",
-      "desc": "Reopen closed tab",
-      "category": "Tabs"
-    },
-    {
-      "keys": "Ctrl+Tab",
-      "desc": "Switch to next tab",
-      "category": "Tabs"
-    },
-    {
-      "keys": "Ctrl+Shift+Tab",
-      "desc": "Switch to previous tab",
-      "category": "Tabs"
-    },
-    {
-      "keys": "Ctrl+F",
-      "desc": "Find in page",
-      "category": "Search"
-    },
-    {
-      "keys": "Ctrl+Shift+F",
-      "desc": "Find across all tabs",
-      "category": "Search"
-    },
-    {
-      "keys": "Ctrl+R",
-      "desc": "Reload page",
-      "category": "Navigation"
-    },
-    {
-      "keys": "Ctrl+Shift+R",
-      "desc": "Reload page (ignore cache)",
-      "category": "Navigation"
-    },
-    {
-      "keys": "Ctrl+D",
-      "desc": "Bookmark current page",
-      "category": "Bookmarks"
-    },
-    {
-      "keys": "Ctrl+Shift+B",
-      "desc": "Toggle bookmarks toolbar",
-      "category": "Bookmarks"
-    },
-    {
-      "keys": "Ctrl+H",
-      "desc": "Open history sidebar",
-      "category": "Sidebar"
-    },
-    {
-      "keys": "Ctrl+B",
-      "desc": "Open bookmarks sidebar",
-      "category": "Sidebar"
-    },
-    {
-      "keys": "Ctrl+Shift+A",
-      "desc": "Open Add-ons Manager",
-      "category": "Tools"
-    },
-    {
-      "keys": "Ctrl+Shift+I",
-      "desc": "Open Developer Tools",
-      "category": "Developer"
-    },
-    {
-      "keys": "F12",
-      "desc": "Toggle Developer Tools",
-      "category": "Developer"
-    },
-    {
-      "keys": "Ctrl+Plus",
-      "desc": "Zoom in",
-      "category": "View"
-    },
-    {
-      "keys": "Ctrl+Minus",
-      "desc": "Zoom out",
-      "category": "View"
-    },
-    {
-      "keys": "Ctrl+0",
-      "desc": "Reset zoom",
-      "category": "View"
-    },
-    {
-      "keys": "Ctrl+Shift+P",
-      "desc": "Open Private Browsing window",
-      "category": "Window"
-    }
+    { "keys": "Ctrl+L", "desc": "Focus address bar", "category": "Navigation" },
+    { "keys": "Alt+Left", "desc": "Back", "category": "Navigation" },
+    { "keys": "Alt+Right", "desc": "Forward", "category": "Navigation" },
+    { "keys": "Alt+Home", "desc": "Home", "category": "Navigation" },
+    { "keys": "Ctrl+R", "desc": "Reload page", "category": "Navigation" },
+    { "keys": "Ctrl+Shift+R", "desc": "Reload page", "category": "Navigation" },
+    { "keys": "Ctrl+J", "desc": "Downloads", "category": "Navigation" },
+    { "keys": "Ctrl+Shift+H", "desc": "History", "category": "Navigation" },
+
+    { "keys": "Ctrl+T", "desc": "New tab", "category": "Tabs" },
+    { "keys": "Ctrl+W", "desc": "Close current tab", "category": "Tabs" },
+    { "keys": "Ctrl+Shift+T", "desc": "Reopen closed tab", "category": "Tabs" },
+    { "keys": "Ctrl+Tab", "desc": "Switch to next tab", "category": "Tabs" },
+    { "keys": "Ctrl+Shift+Tab", "desc": "Switch to previous tab", "category": "Tabs" },
+    { "keys": "Ctrl+1-8", "desc": "Select tab 1 to 8", "category": "Tabs" },
+    { "keys": "Ctrl+9", "desc": "Select last tab", "category": "Tabs" },
+    { "keys": "Ctrl+M", "desc": "Mute/Unmute tab", "category": "Tabs" },
+
+    { "keys": "Ctrl+F", "desc": "Find in page", "category": "Search" },
+    { "keys": "Ctrl+Shift+F", "desc": "Find across all tabs", "category": "Search" },
+    { "keys": "Ctrl+K", "desc": "Focus search bar", "category": "Search" },
+    { "keys": "Ctrl+D", "desc": "Bookmark current page", "category": "Bookmarks" },
+    { "keys": "Ctrl+Shift+B", "desc": "Toggle bookmarks toolbar", "category": "Bookmarks" },
+    { "keys": "Ctrl+B", "desc": "Open bookmarks sidebar", "category": "Sidebar" },
+    { "keys": "Ctrl+H", "desc": "Open history sidebar", "category": "Sidebar" },
+
+    { "keys": "F12", "desc": "Toggle Developer Tools", "category": "Developer" },
+    { "keys": "Ctrl+Shift+I", "desc": "Open Developer Tools", "category": "Developer" },
+    { "keys": "Ctrl+Shift+C", "desc": "Inspector", "category": "Developer" },
+    { "keys": "Ctrl+Shift+K", "desc": "Web Console", "category": "Developer" },
+    { "keys": "Ctrl+Shift+S", "desc": "Take a screenshot", "category": "Tools" },
+    { "keys": "Ctrl+Shift+A", "desc": "Open Add-ons Manager", "category": "Tools" },
+
+    { "keys": "Ctrl+Plus", "desc": "Zoom in", "category": "View" },
+    { "keys": "Ctrl+Minus", "desc": "Zoom out", "category": "View" },
+    { "keys": "Ctrl+0", "desc": "Reset zoom", "category": "View" },
+    { "keys": "F11", "desc": "Full screen", "category": "View" },
+    { "keys": "Ctrl+Alt+R", "desc": "Reader Mode", "category": "View" },
+    { "keys": "Ctrl+U", "desc": "View Page Source", "category": "View" },
+
+    { "keys": "Ctrl+N", "desc": "New Window", "category": "Window" },
+    { "keys": "Ctrl+Shift+P", "desc": "Open Private window", "category": "Window" },
+    { "keys": "Ctrl+Shift+Q", "desc": "Quit Firefox", "category": "Window" },
+    { "keys": "Ctrl+Shift+Del", "desc": "Clear Recent History", "category": "Privacy" }
   ]
 }

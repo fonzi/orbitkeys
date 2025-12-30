@@ -1,0 +1,29 @@
+{
+  "app_id": "obsidian",
+  "name": "Obsidian",
+  "app_ids": [
+    "obsidian",
+    "md.obsidian.Obsidian"
+  ],
+  "shortcuts": [
+    { "keys": "Ctrl+P", "desc": "Open command palette", "category": "General" },
+    { "keys": "Ctrl+O", "desc": "Quick open (Files)", "category": "Navigation" },
+    { "keys": "Alt+Left", "desc": "Navigate back", "category": "Navigation" },
+    { "keys": "Alt+Right", "desc": "Navigate forward", "category": "Navigation" },
+    { "keys": "Ctrl+G", "desc": "Open graph view", "category": "Navigation" },
+
+    { "keys": "Ctrl+N", "desc": "Create new note", "category": "File" },
+    { "keys": "Ctrl+Shift+I", "desc": "Insert attachment", "category": "File" },
+
+    { "keys": "Ctrl+E", "desc": "Toggle Reading/Editing view", "category": "Editor" },
+    { "keys": "Ctrl+Enter", "desc": "Toggle checkbox/Follow link", "category": "Editor" },
+    { "keys": "Ctrl+K", "desc": "Insert markdown link", "category": "Editor" },
+    { "keys": "Ctrl+D", "desc": "Delete current line", "category": "Editor" },
+    { "keys": "Ctrl+Shift+F", "desc": "Search in all files", "category": "Search" },
+
+    { "keys": "Ctrl+Plus", "desc": "Zoom in", "category": "View" },
+    { "keys": "Ctrl+Minus", "desc": "Zoom out", "category": "View" },
+    { "keys": "Ctrl+Shift+L", "desc": "Toggle left sidebar", "category": "View" },
+    { "keys": "Ctrl+Shift+R", "desc": "Toggle right sidebar", "category": "View" }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "app_id": "cosmic-system",
+  "name": "COSMIC Desktop",
+  "app_ids": [
+    "cosmic-system",
+    "root",
+    "cosmic-desktop"
+  ],
+  "shortcuts": [
+    { "keys": "Super+A", "desc": "Open App Launcher", "category": "System" },
+    { "keys": "Super+T", "desc": "Open Terminal", "category": "System" },
+    { "keys": "Super+L", "desc": "Lock Screen", "category": "System" },
+    { "keys": "Super+Esc", "desc": "System Monitor", "category": "System" },
+    { "keys": "Super+/", "desc": "Search for anything", "category": "System" },
+
+    { "keys": "Super+Enter", "desc": "Toggle Tiling Mode", "category": "Tiling" },
+    { "keys": "Super+G", "desc": "Toggle Floating Mode", "category": "Tiling" },
+    { "keys": "Super+Y", "desc": "Toggle Auto-tiling", "category": "Tiling" },
+    { "keys": "Super+S", "desc": "Stack windows together", "category": "Tiling" },
+
+    { "keys": "Super+Arrows", "desc": "Focus neighboring", "category": "Navigation" },
+    { "keys": "Super+Tab", "desc": "Switch Workspaces", "category": "Navigation" },
+    { "keys": "Super+V", "desc": "Workspace Overview", "category": "Navigation" },
+    { "keys": "Super+D", "desc": "Show Desktop", "category": "Navigation" },
+
+    { "keys": "Super+Q", "desc": "Close active window", "category": "Window" },
+    { "keys": "Super+M", "desc": "Maximize/Restore window", "category": "Window" },
+    { "keys": "Super+F", "desc": "Toggle Fullscreen", "category": "Window" },
+    { "keys": "Super+Shift+Arrows", "desc": "Move window position", "category": "Window" },
+    { "keys": "Super+Alt+Arrows", "desc": "Resize active window", "category": "Window" }
+  ]
+}

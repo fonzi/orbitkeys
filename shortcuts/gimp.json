@@ -1,0 +1,39 @@
+{
+  "app_id": "gimp",
+  "name": "GIMP",
+  "app_ids": [
+    "gimp",
+    "gimp-2.10",
+    "org.gimp.GIMP"
+  ],
+  "shortcuts": [
+    { "keys": "R", "desc": "Rectangle Select", "category": "Tools" },
+    { "keys": "E", "desc": "Ellipse Select", "category": "Tools" },
+    { "keys": "F", "desc": "Free Select (Lasso)", "category": "Tools" },
+    { "keys": "B", "desc": "Paintbrush", "category": "Tools" },
+    { "keys": "Shift+E", "desc": "Eraser", "category": "Tools" },
+    { "keys": "Shift+B", "desc": "Bucket Fill", "category": "Tools" },
+    { "keys": "C", "desc": "Crop Tool", "category": "Tools" },
+    { "keys": "M", "desc": "Move Tool", "category": "Tools" },
+    { "keys": "Shift+T", "desc": "Transform Tool", "category": "Tools" },
+
+    { "keys": "Ctrl+L", "desc": "Layers Dialog", "category": "Layers" },
+    { "keys": "Ctrl+Shift+N", "desc": "New Layer", "category": "Layers" },
+    { "keys": "Ctrl+M", "desc": "Merge Visible Layers", "category": "Layers" },
+
+    { "keys": "Ctrl+A", "desc": "Select All", "category": "Selection" },
+    { "keys": "Ctrl+Shift+A", "desc": "Select None (Deselect)", "category": "Selection" },
+    { "keys": "Ctrl+I", "desc": "Invert Selection", "category": "Selection" },
+    { "keys": "Shift+V", "desc": "Path Tool", "category": "Selection" },
+
+    { "keys": "Tab", "desc": "Hide/Show Docks", "category": "View" },
+    { "keys": "Shift+Ctrl+J", "desc": "Fit Image in Window", "category": "View" },
+    { "keys": "Ctrl+J", "desc": "Shrink Wrap Window", "category": "View" },
+    { "keys": "Shift+Q", "desc": "Toggle Quick Mask", "category": "View" },
+
+    { "keys": "Ctrl+O", "desc": "Open Image", "category": "File" },
+    { "keys": "Ctrl+S", "desc": "Save XCF", "category": "File" },
+    { "keys": "Ctrl+Shift+E", "desc": "Export As...", "category": "File" },
+    { "keys": "Ctrl+W", "desc": "Close Image", "category": "File" }
+  ]
+}

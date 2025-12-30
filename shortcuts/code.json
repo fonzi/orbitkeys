@@ -4,13 +4,67 @@
   "app_ids": [
     "code",
     "code-url-handler",
-    "com.visualstudio.code"
+    "com.visualstudio.code",
+    "oss-code"
   ],
   "shortcuts": [
-    { "keys": "Ctrl+Shift+P", "desc": "Open Command Palette", "category": "General" },
-    { "keys": "Ctrl+P", "desc": "Quick Open File", "category": "Navigation" },
-    { "keys": "Ctrl+B", "desc": "Toggle Sidebar", "category": "View" },
-    { "keys": "Ctrl+Shift+N", "desc": "New Window", "category": "Window" },
-    { "keys": "Ctrl+`", "desc": "Toggle Integrated Terminal", "category": "Terminal" }
+    { "keys": "Ctrl+Shift+P", "desc": "Show Command Palette", "category": "General" },
+    { "keys": "Ctrl+P", "desc": "Quick Open, Go to File...", "category": "General" },
+    { "keys": "Ctrl+Shift+N", "desc": "New window/instance", "category": "General" },
+    { "keys": "Ctrl+Shift+W", "desc": "Close window/instance", "category": "General" },
+    { "keys": "Ctrl+,", "desc": "User Settings", "category": "General" },
+    
+    { "keys": "Ctrl+X", "desc": "Cut line (empty selection)", "category": "Basic editing" },
+    { "keys": "Ctrl+C", "desc": "Copy line (empty selection)", "category": "Basic editing" },
+    { "keys": "Alt+Up", "desc": "Move line up", "category": "Basic editing" },
+    { "keys": "Alt+Down", "desc": "Move line down", "category": "Basic editing" },
+    { "keys": "Ctrl+Shift+K", "desc": "Delete line", "category": "Basic editing" },
+    { "keys": "Ctrl+Enter", "desc": "Insert line below", "category": "Basic editing" },
+    { "keys": "Ctrl+/", "desc": "Toggle line comment", "category": "Basic editing" },
+
+    { "keys": "Ctrl+T", "desc": "Show all Symbols", "category": "Navigation" },
+    { "keys": "Ctrl+G", "desc": "Go to Line...", "category": "Navigation" },
+    { "keys": "Ctrl+Shift+O", "desc": "Go to Symbol...", "category": "Navigation" },
+    { "keys": "Ctrl+Shift+M", "desc": "Show Problems panel", "category": "Navigation" },
+    { "keys": "F8", "desc": "Go to next error or warning", "category": "Navigation" },
+
+    { "keys": "Ctrl+F", "desc": "Find", "category": "Search & replace" },
+    { "keys": "Ctrl+H", "desc": "Replace", "category": "Search & replace" },
+    { "keys": "F3", "desc": "Find next", "category": "Search & replace" },
+    { "keys": "Shift+F3", "desc": "Find previous", "category": "Search & replace" },
+    { "keys": "Alt+Enter", "desc": "Select all occurrences of Find match", "category": "Search & replace" },
+    
+    { "keys": "Ctrl+Space", "desc": "Trigger suggestion", "category": "Rich editing" },
+    { "keys": "Ctrl+Shift+Space", "desc": "Trigger parameter hints", "category": "Rich editing" },
+    { "keys": "Shift+Alt+F", "desc": "Format document", "category": "Rich editing" },
+    { "keys": "F12", "desc": "Go to Definition", "category": "Rich editing" },
+    { "keys": "F2", "desc": "Rename Symbol", "category": "Rich editing" },
+
+    { "keys": "Ctrl+F4", "desc": "Close editor", "category": "Editor management" },
+    { "keys": "Ctrl+K Ctrl+W", "desc": "Close All", "category": "Editor management" },
+    { "keys": "Ctrl+\\", "desc": "Split editor", "category": "Editor management" },
+    { "keys": "Ctrl+1", "desc": "Focus into 1st editor group", "category": "Editor management" },
+
+    { "keys": "Ctrl+N", "desc": "New File", "category": "File management" },
+    { "keys": "Ctrl+O", "desc": "Open File...", "category": "File management" },
+    { "keys": "Ctrl+S", "desc": "Save", "category": "File management" },
+    { "keys": "Ctrl+Shift+S", "desc": "Save As...", "category": "File management" },
+    { "keys": "Ctrl+Shift+T", "desc": "Reopen closed editor", "category": "File management" },
+
+    { "keys": "F11", "desc": "Toggle full screen", "category": "Display" },
+    { "keys": "Ctrl+B", "desc": "Toggle Sidebar visibility", "category": "Display" },
+    { "keys": "Ctrl+Shift+E", "desc": "Show Explorer / Toggle focus", "category": "Display" },
+    { "keys": "Ctrl+Shift+F", "desc": "Show Search", "category": "Display" },
+    { "keys": "Ctrl+Shift+G", "desc": "Show Source Control", "category": "Display" },
+    { "keys": "Ctrl+Shift+X", "desc": "Show Extensions", "category": "Display" },
+
+    { "keys": "F5", "desc": "Start/Continue", "category": "Debug" },
+    { "keys": "F9", "desc": "Toggle breakpoint", "category": "Debug" },
+    { "keys": "Shift+F5", "desc": "Stop", "category": "Debug" },
+
+    { "keys": "Ctrl+`", "desc": "Show integrated terminal", "category": "Integrated terminal" },
+    { "keys": "Ctrl+Shift+`", "desc": "Create new terminal", "category": "Integrated terminal" },
+    { "keys": "Ctrl+C", "desc": "Copy selection", "category": "Integrated terminal" },
+    { "keys": "Ctrl+V", "desc": "Paste into active terminal", "category": "Integrated terminal" }
   ]
 }

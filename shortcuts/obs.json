@@ -1,0 +1,25 @@
+{
+  "app_id": "com.obsproject.Studio",
+  "name": "OBS Studio",
+  "app_ids": [
+    "com.obsproject.Studio",
+    "obs",
+    "obs-studio"
+  ],
+  "shortcuts": [
+    { "keys": "Ctrl+R", "desc": "Start/Stop Recording", "category": "General" },
+    { "keys": "Ctrl+S", "desc": "Start/Stop Streaming", "category": "General" },
+    { "keys": "Ctrl+V", "desc": "Start/Stop Virtual Camera", "category": "General" },
+    
+    { "keys": "Ctrl+Q", "desc": "Exit OBS", "category": "General" },
+    { "keys": "Ctrl+Shift+S", "desc": "Toggle Studio Mode", "category": "View" },
+    { "keys": "Ctrl+Alt+S", "desc": "Show Stats", "category": "View" },
+    { "keys": "Ctrl+F", "desc": "Fit to Screen (Source)", "category": "Source" },
+    { "keys": "Ctrl+D", "desc": "Center to Screen (Source)", "category": "Source" },
+    { "keys": "Ctrl+E", "desc": "Edit Transform", "category": "Source" },
+    { "keys": "Alt+Click", "desc": "Crop Source", "category": "Source" },
+
+    { "keys": "Ctrl+1-9", "desc": "Switch to Scene (if configured)", "category": "Scenes" },
+    { "keys": "Ctrl+Space", "desc": "Transition to Output (Studio Mode)", "category": "Scenes" }
+  ]
+}

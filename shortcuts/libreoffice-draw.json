@@ -1,0 +1,21 @@
+{
+  "app_id": "libreoffice-draw",
+  "name": "LibreOffice Draw",
+  "app_ids": [
+    "libreoffice-draw",
+    "sdraw",
+    "org.libreoffice.LibreOffice.draw"
+  ],
+  "shortcuts": [
+    { "keys": "F2", "desc": "Text tool", "category": "Tools" },
+    { "keys": "F3", "desc": "Enter group", "category": "Tools" },
+    { "keys": "Ctrl+F3", "desc": "Exit group", "category": "Tools" },
+    
+    { "keys": "Shift+F10", "desc": "Open context menu", "category": "General" },
+    { "keys": "Ctrl+Enter", "desc": "Activate object", "category": "General" },
+    
+    { "keys": "Ctrl+Plus", "desc": "Zoom in", "category": "View" },
+    { "keys": "Ctrl+Minus", "desc": "Zoom out", "category": "View" },
+    { "keys": "Shift+Ctrl+G", "desc": "Group selected", "category": "Objects" }
+  ]
+}  

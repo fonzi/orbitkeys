@@ -1,0 +1,25 @@
+{
+  "app_id": "com.discordapp.Discord",
+  "name": "Discord",
+  "app_ids": [
+    "com.discordapp.Discord",
+    "discord",
+    "org.webcord.WebCord",
+    "vesktop"
+  ],
+  "shortcuts": [
+    { "keys": "Ctrl+K", "desc": "Quick switcher (Channel/User)", "category": "Navigation" },
+    { "keys": "Alt+Up", "desc": "Navigate between channels", "category": "Navigation" },
+    { "keys": "Alt+Down", "desc": "Navigate between channels", "category": "Navigation" },
+    { "keys": "Alt+Shift+Up", "desc": "Navigate to unread channel", "category": "Navigation" },
+    
+    { "keys": "Ctrl+Shift+M", "desc": "Mute/Unmute toggle", "category": "Voice" },
+    { "keys": "Ctrl+Shift+D", "desc": "Deafen/Undeafen toggle", "category": "Voice" },
+    { "keys": "Ctrl+Shift+A", "desc": "Answer incoming call", "category": "Voice" },
+    { "keys": "Esc", "desc": "Mark channel as read", "category": "General" },
+    { "keys": "Shift+Esc", "desc": "Mark server as read", "category": "General" },
+    { "keys": "Ctrl+/", "desc": "Show keyboard shortcuts", "category": "General" },
+    { "keys": "Ctrl+E", "desc": "Open Emoji picker", "category": "Chat" },
+    { "keys": "Ctrl+F", "desc": "Find in current channel", "category": "Chat" }
+  ]
+}

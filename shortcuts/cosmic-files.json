@@ -1,0 +1,38 @@
+{
+  "app_id": "cosmic-files",
+  "name": "COSMIC Files",
+  "app_ids": [
+    "cosmic-files",
+    "org.pop_os.cosmic-files",
+    "com.system76.CosmicFiles"
+  ],
+  "shortcuts": [
+    { "keys": "Ctrl+N", "desc": "New window", "category": "Management" },
+    { "keys": "Ctrl+Shift+N", "desc": "New folder", "category": "Management" },
+    { "keys": "Ctrl+W", "desc": "Close window", "category": "Management" },
+    { "keys": "F2", "desc": "Rename selected", "category": "Management" },
+    { "keys": "Delete", "desc": "Move to trash", "category": "Management" },
+    { "keys": "Shift+Delete", "desc": "Permanently delete", "category": "Management" },
+
+    { "keys": "Alt+Up", "desc": "Go up one level", "category": "Navigation" },
+    { "keys": "Alt+Left", "desc": "Go back", "category": "Navigation" },
+    { "keys": "Alt+Right", "desc": "Go forward", "category": "Navigation" },
+    { "keys": "Ctrl+L", "desc": "Edit location bar", "category": "Navigation" },
+    { "keys": "Enter", "desc": "Open selected", "category": "Navigation" },
+
+    { "keys": "Ctrl+F", "desc": "Search files", "category": "Selection" },
+    { "keys": "Ctrl+A", "desc": "Select all", "category": "Selection" },
+    { "keys": "Ctrl+I", "desc": "Invert selection", "category": "Selection" },
+
+    { "keys": "Ctrl+H", "desc": "Toggle hidden files", "category": "View" },
+    { "keys": "Ctrl+1", "desc": "Grid view", "category": "View" },
+    { "keys": "Ctrl+2", "desc": "List view", "category": "View" },
+    { "keys": "Ctrl+Plus", "desc": "Zoom in (larger icons)", "category": "View" },
+    { "keys": "Ctrl+Minus", "desc": "Zoom out (smaller icons)", "category": "View" },
+
+    { "keys": "Ctrl+C", "desc": "Copy", "category": "Clipboard" },
+    { "keys": "Ctrl+X", "desc": "Cut", "category": "Clipboard" },
+    { "keys": "Ctrl+V", "desc": "Paste", "category": "Clipboard" },
+    { "keys": "Ctrl+Shift+C", "desc": "Copy file path", "category": "Clipboard" }
+  ]
+}

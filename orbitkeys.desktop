@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+
+Name=OrbitKeys
+Comment=Context-aware keyboard shortcuts for COSMIC
+Exec=orbitkeys
+Icon=applications-system-symbolic
+Terminal=false
+
+Categories=Utility;System;
+StartupNotify=true

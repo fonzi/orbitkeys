@@ -1,0 +1,29 @@
+{
+  "app_id": "com.system76.CosmicEdit",
+  "name": "COSMIC Edit",
+  "app_ids": [
+    "com.system76.CosmicEdit",
+    "cosmic-edit"
+  ],
+  "shortcuts": [
+    { "keys": "Ctrl+N", "desc": "New file", "category": "File" },
+    { "keys": "Ctrl+O", "desc": "Open file", "category": "File" },
+    { "keys": "Ctrl+S", "desc": "Save file", "category": "File" },
+    { "keys": "Ctrl+Shift+S", "desc": "Save as...", "category": "File" },
+
+    { "keys": "Ctrl+F", "desc": "Find", "category": "Edit" },
+    { "keys": "Ctrl+H", "desc": "Replace", "category": "Edit" },
+    { "keys": "Ctrl+Z", "desc": "Undo", "category": "Edit" },
+    { "keys": "Ctrl+Shift+Z", "desc": "Redo", "category": "Edit" },
+
+    { "keys": "Ctrl+D", "desc": "Duplicate line", "category": "Selection" },
+    { "keys": "Ctrl+K", "desc": "Delete line", "category": "Selection" },
+    { "keys": "Alt+Up", "desc": "Move line up", "category": "Selection" },
+    { "keys": "Alt+Down", "desc": "Move line down", "category": "Selection" },
+
+    { "keys": "Ctrl+Plus", "desc": "Zoom in", "category": "View" },
+    { "keys": "Ctrl+Minus", "desc": "Zoom out", "category": "View" },
+    { "keys": "Ctrl+0", "desc": "Reset zoom", "category": "View" },
+    { "keys": "F11", "desc": "Toggle fullscreen", "category": "View" }
+  ]
+}

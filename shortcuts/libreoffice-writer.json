@@ -1,0 +1,38 @@
+{
+  "app_id": "libreoffice-writer",
+  "name": "LibreOffice Writer",
+  "app_ids": [
+    "libreoffice-writer",
+    "swriter",
+    "org.libreoffice.LibreOffice.writer"
+  ],
+  "shortcuts": [
+    { "keys": "Ctrl+N", "desc": "New document", "category": "File" },
+    { "keys": "Ctrl+O", "desc": "Open document", "category": "File" },
+    { "keys": "Ctrl+S", "desc": "Save", "category": "File" },
+    { "keys": "Ctrl+P", "desc": "Print", "category": "File" },
+
+    { "keys": "Ctrl+B", "desc": "Bold", "category": "Formatting" },
+    { "keys": "Ctrl+I", "desc": "Italic", "category": "Formatting" },
+    { "keys": "Ctrl+U", "desc": "Underline", "category": "Formatting" },
+    { "keys": "Ctrl+L", "desc": "Left align", "category": "Formatting" },
+    { "keys": "Ctrl+R", "desc": "Right align", "category": "Formatting" },
+    { "keys": "Ctrl+E", "desc": "Center align", "category": "Formatting" },
+    { "keys": "Ctrl+J", "desc": "Justified align", "category": "Formatting" },
+    { "keys": "Ctrl+1", "desc": "Single line spacing", "category": "Formatting" },
+    { "keys": "Ctrl+5", "desc": "1.5 line spacing", "category": "Formatting" },
+    { "keys": "Ctrl+2", "desc": "Double line spacing", "category": "Formatting" },
+
+    { "keys": "Ctrl+F", "desc": "Find", "category": "Search" },
+    { "keys": "Ctrl+H", "desc": "Find and Replace", "category": "Search" },
+
+    { "keys": "Ctrl+Enter", "desc": "Page break", "category": "Insert" },
+    { "keys": "Ctrl+F12", "desc": "Insert table", "category": "Insert" },
+    { "keys": "Ctrl+K", "desc": "Insert hyperlink", "category": "Insert" },
+
+    { "keys": "F7", "desc": "Spelling check", "category": "Tools" },
+    { "keys": "Ctrl+F7", "desc": "Thesaurus", "category": "Tools" },
+    { "keys": "F11", "desc": "Styles sidebar", "category": "View" },
+    { "keys": "Ctrl+Shift+J", "desc": "Full screen", "category": "View" }
+  ]
+}

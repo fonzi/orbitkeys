@@ -1,0 +1,57 @@
+{
+  "app_id": "google-chrome",
+  "name": "Chromium Browsers",
+  "app_ids": [
+    "google-chrome",
+    "google-chrome-stable",
+    "com.google.Chrome",
+    "brave-browser",
+    "com.brave.Browser",
+    "microsoft-edge",
+    "com.microsoft.Edge",
+    "chromium-browser",
+    "chromium",
+    "org.chromium.Chromium"
+  ],
+  "shortcuts": [
+    { "keys": "Ctrl+L", "desc": "Focus address bar", "category": "Navigation" },
+    { "keys": "Alt+Left", "desc": "Back", "category": "Navigation" },
+    { "keys": "Alt+Right", "desc": "Forward", "category": "Navigation" },
+    { "keys": "Ctrl+R", "desc": "Reload page", "category": "Navigation" },
+    { "keys": "Ctrl+Shift+R", "desc": "Reload (ignore cache)", "category": "Navigation" },
+    { "keys": "Ctrl+J", "desc": "Open Downloads", "category": "Navigation" },
+    { "keys": "Ctrl+H", "desc": "Open History", "category": "Navigation" },
+
+    { "keys": "Ctrl+T", "desc": "New tab", "category": "Tabs" },
+    { "keys": "Ctrl+W", "desc": "Close current tab", "category": "Tabs" },
+    { "keys": "Ctrl+Shift+T", "desc": "Reopen last closed tab", "category": "Tabs" },
+    { "keys": "Ctrl+Tab", "desc": "Next tab", "category": "Tabs" },
+    { "keys": "Ctrl+Shift+Tab", "desc": "Previous tab", "category": "Tabs" },
+    { "keys": "Ctrl+1-8", "desc": "Jump to tab 1-8", "category": "Tabs" },
+    { "keys": "Ctrl+9", "desc": "Jump to last tab", "category": "Tabs" },
+
+    { "keys": "Ctrl+F", "desc": "Find in page", "category": "Search" },
+    { "keys": "Ctrl+G", "desc": "Find next match", "category": "Search" },
+    { "keys": "Ctrl+Shift+G", "desc": "Find previous match", "category": "Search" },
+
+    { "keys": "Ctrl+D", "desc": "Bookmark current page", "category": "Bookmarks" },
+    { "keys": "Ctrl+Shift+D", "desc": "Bookmark all open tabs", "category": "Bookmarks" },
+    { "keys": "Ctrl+Shift+B", "desc": "Toggle Bookmarks bar", "category": "Bookmarks" },
+    { "keys": "Ctrl+Shift+O", "desc": "Open Bookmarks Manager", "category": "Bookmarks" },
+
+    { "keys": "F12", "desc": "Toggle Developer Tools", "category": "Developer" },
+    { "keys": "Ctrl+Shift+I", "desc": "Open Developer Tools", "category": "Developer" },
+    { "keys": "Ctrl+Shift+J", "desc": "Open Console", "category": "Developer" },
+    { "keys": "Ctrl+Shift+C", "desc": "Inspect elements", "category": "Developer" },
+    { "keys": "Shift+Esc", "desc": "Browser Task Manager", "category": "Tools" },
+
+    { "keys": "Ctrl+Plus", "desc": "Zoom in", "category": "View" },
+    { "keys": "Ctrl+Minus", "desc": "Zoom out", "category": "View" },
+    { "keys": "Ctrl+0", "desc": "Reset zoom", "category": "View" },
+    { "keys": "F11", "desc": "Full screen", "category": "View" },
+
+    { "keys": "Ctrl+N", "desc": "New window", "category": "Window" },
+    { "keys": "Ctrl+Shift+N", "desc": "New Incognito/Private window", "category": "Window" },
+    { "keys": "Ctrl+Shift+Del", "desc": "Clear browsing data", "category": "Privacy" }
+  ]
+}

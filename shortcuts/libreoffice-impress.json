@@ -1,0 +1,24 @@
+{
+  "app_id": "libreoffice-impress",
+  "name": "LibreOffice Impress",
+  "app_ids": [
+    "libreoffice-impress",
+    "simpress",
+    "org.libreoffice.LibreOffice.impress"
+  ],
+  "shortcuts": [
+    { "keys": "F5", "desc": "Start from first slide", "category": "Slide Show" },
+    { "keys": "Shift+F5", "desc": "Start from current slide", "category": "Slide Show" },
+    { "keys": "Esc", "desc": "End presentation", "category": "Slide Show" },
+    { "keys": "Space", "desc": "Next transition", "category": "Slide Show" },
+    { "keys": "Backspace", "desc": "Previous transition", "category": "Slide Show" },
+
+    { "keys": "Ctrl+M", "desc": "New slide", "category": "Management" },
+    { "keys": "Ctrl+D", "desc": "Duplicate slide", "category": "Management" },
+    
+    { "keys": "Ctrl+Shift+G", "desc": "Group objects", "category": "Objects" },
+    { "keys": "Ctrl+Alt+Shift+G", "desc": "Ungroup objects", "category": "Objects" },
+    { "keys": "Ctrl+Plus", "desc": "Bring to front", "category": "Objects" },
+    { "keys": "Ctrl+Minus", "desc": "Send to back", "category": "Objects" }
+  ]
+}

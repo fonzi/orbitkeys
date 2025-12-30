@@ -4,7 +4,6 @@ pub enum KeyGlyph {
     Shift,
     Alt,
     Super,
-    Cmd,
 
     Tab,
     Enter,
@@ -18,6 +17,8 @@ pub enum KeyGlyph {
 
     Plus,
     Minus,
+
+    Space,
 }
 
 impl KeyGlyph {
@@ -26,8 +27,7 @@ impl KeyGlyph {
             KeyGlyph::Ctrl => "⌃",
             KeyGlyph::Shift => "⇧",
             KeyGlyph::Alt => "⎇",
-            KeyGlyph::Super => "❖",
-            KeyGlyph::Cmd => "⌘",
+            KeyGlyph::Super => "⌘",
 
             KeyGlyph::Tab => "⇥",
             KeyGlyph::Enter => "↵",
@@ -41,6 +41,8 @@ impl KeyGlyph {
 
             KeyGlyph::Plus => "+",
             KeyGlyph::Minus => "−",
+
+            KeyGlyph::Space => "␣",
         }
     }
 }

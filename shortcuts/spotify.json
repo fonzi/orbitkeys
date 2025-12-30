@@ -1,0 +1,22 @@
+{
+  "app_id": "com.spotify.Client",
+  "name": "Spotify",
+  "app_ids": [
+    "spotify",
+    "com.spotify.Client"
+  ],
+  "shortcuts": [
+    { "keys": "Space", "desc": "Play / Pause", "category": "Playback" },
+    { "keys": "Ctrl+Right", "desc": "Next track", "category": "Playback" },
+    { "keys": "Ctrl+Left", "desc": "Previous track", "category": "Playback" },
+    { "keys": "Ctrl+Up", "desc": "Volume up", "category": "Playback" },
+    { "keys": "Ctrl+Down", "desc": "Volume down", "category": "Playback" },
+
+    { "keys": "Ctrl+L", "desc": "Search", "category": "Navigation" },
+    { "keys": "Alt+Left", "desc": "Back in history", "category": "Navigation" },
+    { "keys": "Alt+Right", "desc": "Forward in history", "category": "Navigation" },
+
+    { "keys": "Ctrl+S", "desc": "Toggle Shuffle", "category": "Playlist" },
+    { "keys": "Ctrl+R", "desc": "Toggle Repeat", "category": "Playlist" }
+  ]
+}

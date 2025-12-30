@@ -3,12 +3,10 @@ use std::fs;
 use std::time::Duration;
 
 use cosmic::app::Core;
-use cosmic::iced::{keyboard, Alignment, Fill, Length, Subscription};
+use cosmic::iced::{keyboard, window, Alignment, Fill, Length, Subscription};
 use cosmic::iced::event::{Event, Status};
 use cosmic::iced::widget::{checkbox, mouse_area};
-use cosmic::widget::{
-    button, column, container, icon, row, scrollable, text, text_input, Space,
-};
+use cosmic::widget::{button, column, container, row, scrollable, text, text_input, Space};
 use cosmic::{Action, Application, Element, Task};
 
 use serde::Deserialize;
@@ -36,14 +34,16 @@ struct ShortcutEntry {
 // ---------- Messages ----------
 #[derive(Debug, Clone)]
 pub enum Message {
-    Toggle,
     AppIdChanged(String),
     SearchChanged(String),
     Tick,
 
     ToggleSettings,
     CloseSettings,
-    SemiTransparentToggled(bool),
+
+    GoHome,
+
+    QuitRequested,
 }
 
 // ---------- App ----------
@@ -62,7 +62,6 @@ pub struct OrbitKeysUi {
     last_target_app_id: Option<String>,
 
     show_settings: bool,
-    semi_transparent: bool,
 }
 
 /// Single-line truncation with ellipsis.
@@ -171,35 +170,45 @@ impl OrbitKeysUi {
             .collect();
     }
 
+    fn set_active_app(&mut self, app_id: &str) {
+        let app_id = app_id.trim();
+        if app_id.is_empty() {
+            return;
+        }
+
+        if self.last_target_app_id.as_deref() == Some(app_id) {
+            return;
+        }
+
+        self.last_target_app_id = Some(app_id.to_string());
+        self.app_id_text = app_id.to_string();
+        self.load_for_app_id(app_id);
+    }
+
     fn drain_focus_updates(&mut self) {
         let mut latest = None;
         while let Ok(v) = self.focus_rx.try_recv() {
             latest = Some(v);
         }
 
-        let Some(app_id) = latest else {
-            return;
-        };
+        let Some(app_id) = latest else { return };
 
+        // Ignore our own window
         if app_id == Self::APP_ID {
             return;
         }
 
         let app_id = app_id.trim().to_string();
         if app_id.is_empty() || app_id == "unknown" {
+            // Don’t try to infer desktop focus. User uses Home button for root.
             return;
         }
 
-        if self.last_target_app_id.as_deref() == Some(&app_id) {
-            return;
-        }
-
-        self.last_target_app_id = Some(app_id.clone());
-        self.app_id_text = app_id.clone();
-        self.load_for_app_id(&app_id);
+        self.set_active_app(&app_id);
     }
 
-    fn gear_overlay(&self) -> Element<'_, Message> {
+    fn overlay_controls(&self) -> Element<'_, Message> {
+        // bottom-right icon-only controls (Home + Gear)
         container(
             column()
                 .width(Length::Fill)
@@ -207,8 +216,14 @@ impl OrbitKeysUi {
                 .push(Space::with_height(Length::Fill))
                 .push(
                     row()
+                        .spacing(6)
                         .width(Length::Fill)
                         .push(Space::with_width(Length::Fill))
+                        .push(
+                            button::text("⌂")
+                                .class(cosmic::theme::Button::Icon)
+                                .on_press(Message::GoHome),
+                        )
                         .push(
                             button::text("⚙")
                                 .class(cosmic::theme::Button::Icon)
@@ -224,7 +239,7 @@ impl OrbitKeysUi {
     }
 
     fn settings_overlay(&self) -> Element<'_, Message> {
-        // 1) Full-window click-capture layer (blocks underlying UI)
+        // click-capture layer
         let blocker: Element<'_, Message> = mouse_area(
             container(Space::new(Length::Fill, Length::Fill))
                 .width(Length::Fill)
@@ -233,35 +248,32 @@ impl OrbitKeysUi {
         .on_press(Message::CloseSettings)
         .into();
 
-        // 2) Panel content (COSMIC themed; no custom colors)
+        // panel content (no custom colors)
         let panel_content = column()
             .spacing(12)
             .push(text("Settings").size(20))
-            .push(
-                checkbox("Semi-transparent", self.semi_transparent)
-                    .on_toggle(Message::SemiTransparentToggled),
-            )
             .push(Space::with_height(Length::Fixed(6.0)))
-            .push(text("Maintainer").size(16))
-            .push(text("fonzi.xyz").size(14))
+            .push(
+                row()
+                    .width(Length::Fill)
+                    .align_y(Alignment::Center)
+                    .push(text("Maintainer").size(16))
+                    .push(Space::with_width(Length::Fill))
+                    .push(text("https://fonzi.xyz").size(14)),
+            )
             .push(Space::with_height(Length::Fixed(10.0)))
             .push(
                 row()
                     .width(Length::Fill)
                     .push(Space::with_width(Length::Fill))
-                    .push(
-                        // COSMIC-styled button (instead of iced::widget::button)
-                        button::text("Close").on_press(Message::CloseSettings),
-                    ),
+                    .push(button::text("Close").on_press(Message::CloseSettings)),
             );
 
-        // If Container::Card doesn't compile in your libcosmic version, remove `.class(...)`.
         let panel = container(panel_content)
             .padding(18)
             .width(Length::Fixed(360.0))
             .class(cosmic::theme::Container::Card);
 
-        // Centered panel (layout-only)
         let centered = container(
             column()
                 .width(Length::Fill)
@@ -284,7 +296,7 @@ impl OrbitKeysUi {
 }
 
 impl Application for OrbitKeysUi {
-    const APP_ID: &'static str = "com.fonzi.orbitkeys";
+    const APP_ID: &'static str = "xyz.fonzi.orbitkeys";
 
     type Executor = cosmic::executor::Default;
     type Flags = ShortcutResolver;
@@ -318,7 +330,6 @@ impl Application for OrbitKeysUi {
                 focus_rx: rx,
                 last_target_app_id: None,
                 show_settings: false,
-                semi_transparent: false,
             },
             Task::none(),
         )
@@ -326,13 +337,11 @@ impl Application for OrbitKeysUi {
 
     fn update(&mut self, message: Self::Message) -> Task<Action<Self::Message>> {
         match message {
-            Message::Toggle => {}
             Message::AppIdChanged(v) => {
                 self.app_id_text = v;
                 let id = self.app_id_text.trim().to_string();
                 if !id.is_empty() {
-                    self.last_target_app_id = Some(id.clone());
-                    self.load_for_app_id(&id);
+                    self.set_active_app(&id);
                 }
             }
             Message::SearchChanged(v) => self.search = v,
@@ -340,33 +349,33 @@ impl Application for OrbitKeysUi {
 
             Message::ToggleSettings => self.show_settings = !self.show_settings,
             Message::CloseSettings => self.show_settings = false,
-            Message::SemiTransparentToggled(v) => self.semi_transparent = v,
+
+            Message::GoHome => {
+                // Virtual app_id for COSMIC desktop tiling shortcuts
+                self.set_active_app("root");
+            }
+
+            Message::QuitRequested => {
+                std::process::exit(0);
+            }
         }
+
         Task::none()
     }
 
     fn subscription(&self) -> Subscription<Message> {
-        let hotkey = cosmic::iced::event::listen_with(|event, _, _| match event {
-            Event::Keyboard(keyboard::Event::KeyPressed { key, modifiers, .. }) => {
-                if modifiers.logo()
-                    && modifiers.shift()
-                    && matches!(
-                        key,
-                        keyboard::Key::Character(ref c) if c.eq_ignore_ascii_case("s")
-                    )
-                {
-                    Some((Status::Captured, Message::Toggle))
-                } else {
-                    None
-                }
+        let events = cosmic::iced::event::listen_with(|event, _, _| match event {
+            Event::Window(window::Event::CloseRequested) => {
+                Some((Status::Captured, Message::QuitRequested))
             }
+            Event::Keyboard(keyboard::Event::KeyPressed { .. }) => None,
             _ => None,
         })
         .map(|(_, msg)| msg);
 
         let tick = cosmic::iced::time::every(Duration::from_millis(90)).map(|_| Message::Tick);
 
-        Subscription::batch(vec![hotkey, tick])
+        Subscription::batch(vec![events, tick])
     }
 
     fn view(&self) -> Element<'_, Self::Message> {
@@ -458,10 +467,14 @@ impl Application for OrbitKeysUi {
         .into();
 
         if self.show_settings {
-            cosmic::iced::widget::stack![main_content, self.gear_overlay(), self.settings_overlay()]
-                .into()
+            cosmic::iced::widget::stack![
+                main_content,
+                self.overlay_controls(),
+                self.settings_overlay()
+            ]
+            .into()
         } else {
-            cosmic::iced::widget::stack![main_content, self.gear_overlay()].into()
+            cosmic::iced::widget::stack![main_content, self.overlay_controls()].into()
         }
     }
 }

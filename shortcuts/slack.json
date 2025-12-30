@@ -1,0 +1,31 @@
+{
+  "app_id": "slack",
+  "name": "Slack",
+  "app_ids": [
+    "slack",
+    "com.slack.Slack"
+  ],
+  "shortcuts": [
+    { "keys": "Ctrl+K", "desc": "Quick switcher", "category": "Navigation" },
+    { "keys": "Alt+Up", "desc": "Previous channel/DM", "category": "Navigation" },
+    { "keys": "Alt+Down", "desc": "Next channel/DM", "category": "Navigation" },
+    { "keys": "Alt+Left", "desc": "Back in history", "category": "Navigation" },
+    { "keys": "Alt+Right", "desc": "Forward in history", "category": "Navigation" },
+    { "keys": "Ctrl+Shift+K", "desc": "Direct messages", "category": "Navigation" },
+    { "keys": "Ctrl+Shift+A", "desc": "All unreads", "category": "Navigation" },
+
+    { "keys": "Ctrl+F", "desc": "Search current channel", "category": "Search" },
+    { "keys": "Ctrl+G", "desc": "Search all channels", "category": "Search" },
+
+    { "keys": "Ctrl+Shift+D", "desc": "Toggle sidebar", "category": "View" },
+    { "keys": "Ctrl+.", "desc": "Toggle right pane (Details)", "category": "View" },
+    { "keys": "Ctrl+Plus", "desc": "Zoom in", "category": "View" },
+    { "keys": "Ctrl+Minus", "desc": "Zoom out", "category": "View" },
+
+    { "keys": "Ctrl+Shift+L", "desc": "Browse channels", "category": "General" },
+    { "keys": "Ctrl+U", "desc": "Upload a file", "category": "General" },
+    { "keys": "Ctrl+Shift+M", "desc": "Set status", "category": "General" },
+    { "keys": "Esc", "desc": "Mark channel as read", "category": "General" },
+    { "keys": "Shift+Esc", "desc": "Mark everything as read", "category": "General" }
+  ]
+}

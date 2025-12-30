@@ -1,0 +1,29 @@
+{
+  "app_id": "org.inkscape.Inkscape",
+  "name": "Inkscape",
+  "app_ids": [
+    "org.inkscape.Inkscape",
+    "inkscape"
+  ],
+  "shortcuts": [
+    { "keys": "S", "desc": "Selector tool", "category": "Tools" },
+    { "keys": "N", "desc": "Node tool", "category": "Tools" },
+    { "keys": "P", "desc": "Pen tool (Bézier)", "category": "Tools" },
+    { "keys": "T", "desc": "Text tool", "category": "Tools" },
+    { "keys": "G", "desc": "Gradient tool", "category": "Tools" },
+
+    { "keys": "Ctrl+Shift+F", "desc": "Fill and Stroke dialog", "category": "Dialogs" },
+    { "keys": "Ctrl+Shift+L", "desc": "Layers dialog", "category": "Dialogs" },
+    { "keys": "Ctrl+Shift+A", "desc": "Align and Distribute", "category": "Dialogs" },
+
+    { "keys": "Ctrl+Shift+C", "desc": "Object to Path", "category": "Path" },
+    { "keys": "Ctrl+Alt+C", "desc": "Stroke to Path", "category": "Path" },
+    { "keys": "Ctrl+K", "desc": "Combine paths", "category": "Path" },
+    { "keys": "Ctrl+Shift+K", "desc": "Break path apart", "category": "Path" },
+
+    { "keys": "Ctrl+G", "desc": "Group objects", "category": "Object" },
+    { "keys": "Ctrl+U", "desc": "Ungroup objects", "category": "Object" },
+    { "keys": "Home", "desc": "Raise to top", "category": "Object" },
+    { "keys": "End", "desc": "Lower to bottom", "category": "Object" }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "app_id": "libreoffice-calc",
+  "name": "LibreOffice Calc",
+  "app_ids": [
+    "libreoffice-calc",
+    "scalc",
+    "org.libreoffice.LibreOffice.calc"
+  ],
+  "shortcuts": [
+    { "keys": "Ctrl+Home", "desc": "Go to cell A1", "category": "Navigation" },
+    { "keys": "Ctrl+End", "desc": "Go to last data cell", "category": "Navigation" },
+    { "keys": "Ctrl+Arrow", "desc": "Jump to data edge", "category": "Navigation" },
+
+    { "keys": "Ctrl+F2", "desc": "Function Wizard", "category": "Formulas" },
+    { "keys": "Ctrl+Shift+Enter", "desc": "Matrix formula", "category": "Formulas" },
+    { "keys": "Ctrl+`", "desc": "Show all formulas", "category": "Formulas" },
+
+    { "keys": "Ctrl+Space", "desc": "Select column", "category": "Selection" },
+    { "keys": "Shift+Space", "desc": "Select row", "category": "Selection" },
+    { "keys": "Ctrl+Shift+Plus", "desc": "Insert cells", "category": "Cells" },
+    { "keys": "Ctrl+Minus", "desc": "Delete cells", "category": "Cells" },
+
+    { "keys": "Ctrl+Shift+1", "desc": "Format as Two Decimals", "category": "Formatting" },
+    { "keys": "Ctrl+Shift+4", "desc": "Format as Currency", "category": "Formatting" },
+    { "keys": "Ctrl+Shift+5", "desc": "Format as Percentage", "category": "Formatting" },
+    { "keys": "Ctrl+1", "desc": "Format Cells dialog", "category": "Formatting" }
+  ]
+}

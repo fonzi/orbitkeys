@@ -1,0 +1,34 @@
+{
+  "app_id": "thunderbird",
+  "name": "Thunderbird / Betterbird",
+  "app_ids": [
+    "thunderbird",
+    "org.mozilla.Thunderbird",
+    "betterbird",
+    "eu.betterbird.Betterbird"
+  ],
+  "shortcuts": [
+    { "keys": "Ctrl+N", "desc": "New message", "category": "Management" },
+    { "keys": "Ctrl+R", "desc": "Reply", "category": "Management" },
+    { "keys": "Ctrl+Shift+R", "desc": "Reply all", "category": "Management" },
+    { "keys": "Ctrl+L", "desc": "Forward", "category": "Management" },
+    { "keys": "Ctrl+S", "desc": "Save as draft", "category": "Management" },
+    { "keys": "Ctrl+Enter", "desc": "Send message", "category": "Management" },
+
+    { "keys": "Ctrl+1", "desc": "Go to Mail", "category": "Navigation" },
+    { "keys": "Ctrl+2", "desc": "Go to Address Book", "category": "Navigation" },
+    { "keys": "Ctrl+3", "desc": "Go to Calendar", "category": "Navigation" },
+    { "keys": "F5", "desc": "Get new messages", "category": "Navigation" },
+
+    { "keys": "Ctrl+K", "desc": "Global search", "category": "Search" },
+    { "keys": "Ctrl+Shift+F", "desc": "Search messages", "category": "Search" },
+
+    { "keys": "Ctrl+U", "desc": "View message source", "category": "View" },
+    { "keys": "Ctrl+Shift+H", "desc": "Toggle message header", "category": "View" },
+    { "keys": "Ctrl+B", "desc": "Toggle folder pane", "category": "View" },
+
+    { "keys": "Ctrl+A", "desc": "Select all messages", "category": "Edit" },
+    { "keys": "Ctrl+D", "desc": "Delete message", "category": "Edit" },
+    { "keys": "Ctrl+Shift+A", "desc": "Archive message", "category": "Edit" }
+  ]
+}

@@ -83,8 +83,6 @@ where
     on_focus: F,
 }
 
-// --- DISPATCH LOGIC ---
-
 // 1) ext-foreign-toplevel-list: new window discovered
 impl<F> Dispatch<ext_foreign_toplevel_list_v1::ExtForeignToplevelListV1, ()> for DiscoveryState<F>
 where

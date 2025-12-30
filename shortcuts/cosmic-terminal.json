@@ -1,0 +1,25 @@
+{
+  "app_id": "com.system76.CosmicTerm",
+  "name": "COSMIC Terminal",
+  "app_ids": [
+    "com.system76.CosmicTerm",
+    "cosmic-term",
+    "alacritty",
+    "org.alacritty.Alacritty"
+  ],
+  "shortcuts": [
+    { "keys": "Ctrl+Shift+C", "desc": "Copy", "category": "Clipboard" },
+    { "keys": "Ctrl+Shift+V", "desc": "Paste", "category": "Clipboard" },
+    
+    { "keys": "Ctrl+T", "desc": "New Tab", "category": "Navigation" },
+    { "keys": "Ctrl+W", "desc": "Close Tab", "category": "Navigation" },
+    { "keys": "Ctrl+PageUp", "desc": "Previous Tab", "category": "Navigation" },
+    { "keys": "Ctrl+PageDown", "desc": "Next Tab", "category": "Navigation" },
+
+    { "keys": "Ctrl+Shift+F", "desc": "Search text", "category": "Search" },
+    { "keys": "Ctrl+Plus", "desc": "Zoom in", "category": "View" },
+    { "keys": "Ctrl+Minus", "desc": "Zoom out", "category": "View" },
+    { "keys": "Ctrl+0", "desc": "Reset zoom", "category": "View" },
+    { "keys": "Ctrl+L", "desc": "Clear terminal screen", "category": "View" }
+  ]
+}

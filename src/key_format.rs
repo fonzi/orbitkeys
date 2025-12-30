@@ -8,7 +8,6 @@ pub fn pretty_keys(raw: &str) -> String {
         ("Shift+", KeyGlyph::Shift),
         ("Alt+", KeyGlyph::Alt),
         ("Super+", KeyGlyph::Super),
-        ("Cmd+", KeyGlyph::Cmd),
 
         ("Tab", KeyGlyph::Tab),
         ("Enter", KeyGlyph::Enter),
@@ -23,6 +22,8 @@ pub fn pretty_keys(raw: &str) -> String {
 
         ("Plus", KeyGlyph::Plus),
         ("Minus", KeyGlyph::Minus),
+
+        ("Space", KeyGlyph::Space),
     ];
 
     for (needle, glyph) in map {

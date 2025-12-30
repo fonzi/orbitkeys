@@ -1,0 +1,26 @@
+{
+  "app_id": "org.videolan.VLC",
+  "name": "VLC Media Player",
+  "app_ids": [
+    "vlc",
+    "org.videolan.VLC"
+  ],
+  "shortcuts": [
+    { "keys": "Space", "desc": "Play / Pause", "category": "Playback" },
+    { "keys": "F", "desc": "Toggle Fullscreen", "category": "Playback" },
+    { "keys": "N", "desc": "Next track", "category": "Playback" },
+    { "keys": "P", "desc": "Previous track", "category": "Playback" },
+    { "keys": "S", "desc": "Stop playback", "category": "Playback" },
+
+    { "keys": "Ctrl+Up", "desc": "Volume up", "category": "Audio" },
+    { "keys": "Ctrl+Down", "desc": "Volume down", "category": "Audio" },
+    { "keys": "M", "desc": "Mute audio", "category": "Audio" },
+
+    { "keys": "Right", "desc": "Seek forward 10s", "category": "Navigation" },
+    { "keys": "Left", "desc": "Seek backward 10s", "category": "Navigation" },
+    { "keys": "Ctrl+T", "desc": "Go to specific time", "category": "Navigation" },
+
+    { "keys": "Ctrl+H", "desc": "Hide/Show controls", "category": "View" },
+    { "keys": "V", "desc": "Cycle Subtitles", "category": "View" }
+  ]
+}

@@ -9,6 +9,9 @@ This project is intentionally **COSMIC-only**:
 
 ---
 
+## Demo
+https://github.com/user-attachments/assets/a6066daf-1bdd-44cf-9b30-02f44a717b19
+
 ## Features
 
 - Context-aware keyboard shortcut display

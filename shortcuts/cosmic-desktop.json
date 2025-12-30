@@ -4,29 +4,50 @@
   "app_ids": [
     "cosmic-system",
     "root",
-    "cosmic-desktop"
+    "cosmic-comp",
+    "cosmic-panel"
   ],
   "shortcuts": [
-    { "keys": "Super+A", "desc": "Open App Launcher", "category": "System" },
-    { "keys": "Super+T", "desc": "Open Terminal", "category": "System" },
-    { "keys": "Super+L", "desc": "Lock Screen", "category": "System" },
-    { "keys": "Super+Esc", "desc": "System Monitor", "category": "System" },
-    { "keys": "Super+/", "desc": "Search for anything", "category": "System" },
+    { "keys": "Super", "desc": "Launcher", "category": "Launcher" },
+    { "keys": "Super+/", "desc": "Launcher (Alt)", "category": "Launcher" },
 
-    { "keys": "Super+Enter", "desc": "Toggle Tiling Mode", "category": "Tiling" },
-    { "keys": "Super+G", "desc": "Toggle Floating Mode", "category": "Tiling" },
-    { "keys": "Super+Y", "desc": "Toggle Auto-tiling", "category": "Tiling" },
-    { "keys": "Super+S", "desc": "Stack windows together", "category": "Tiling" },
+    { "keys": "Super+Arrows", "desc": "Focus neighbor", "category": "Navigation" },
+    { "keys": "Super+HJKL", "desc": "Focus neighbor (Vim)", "category": "Navigation" },
+    { "keys": "Super+Tab", "desc": "Switch window", "category": "Navigation" },
+    { "keys": "Super+Alt+Arrows", "desc": "Switch display", "category": "Navigation" },
+    { "keys": "Super+Ctrl+Arrows", "desc": "Switch workspace", "category": "Navigation" },
+    { "keys": "Super+1-9", "desc": "Workspace 1-9", "category": "Navigation" },
+    { "keys": "Super+0", "desc": "Last workspace", "category": "Navigation" },
 
-    { "keys": "Super+Arrows", "desc": "Focus neighboring", "category": "Navigation" },
-    { "keys": "Super+Tab", "desc": "Switch Workspaces", "category": "Navigation" },
-    { "keys": "Super+V", "desc": "Workspace Overview", "category": "Navigation" },
-    { "keys": "Super+D", "desc": "Show Desktop", "category": "Navigation" },
+    { "keys": "Super+Shift+Arrows", "desc": "Move window", "category": "Movement" },
+    { "keys": "Super+Shift+Alt+Arrows", "desc": "Move to display", "category": "Movement" },
+    { "keys": "Super+Shift+Ctrl+Arrows", "desc": "Move to workspace", "category": "Movement" },
+    { "keys": "Super+Shift+1-9", "desc": "Move to workspace 1-9", "category": "Movement" },
 
-    { "keys": "Super+Q", "desc": "Close active window", "category": "Window" },
-    { "keys": "Super+M", "desc": "Maximize/Restore window", "category": "Window" },
-    { "keys": "Super+F", "desc": "Toggle Fullscreen", "category": "Window" },
-    { "keys": "Super+Shift+Arrows", "desc": "Move window position", "category": "Window" },
-    { "keys": "Super+Alt+Arrows", "desc": "Resize active window", "category": "Window" }
+    { "keys": "Super+Q", "desc": "Close", "category": "Windows" },
+    { "keys": "Super+M", "desc": "Maximize", "category": "Windows" },
+    { "keys": "Super+F11", "desc": "Fullscreen", "category": "Windows" },
+    { "keys": "Super+R", "desc": "Resize mode", "category": "Windows" },
+    { "keys": "Super+S", "desc": "Stack windows", "category": "Windows" },
+
+    { "keys": "Super+Y", "desc": "Tiling toggle", "category": "Tiling" },
+    { "keys": "Super+G", "desc": "Floating toggle", "category": "Tiling" },
+    { "keys": "Super+O", "desc": "Orientation toggle", "category": "Tiling" },
+    { "keys": "Super+X", "desc": "Swap window", "category": "Tiling" },
+    { "keys": "Super+U", "desc": "Select tree up", "category": "Tiling" },
+    { "keys": "Super+I", "desc": "Select tree down", "category": "Tiling" },
+
+    { "keys": "Super+A", "desc": "Apps library", "category": "System" },
+    { "keys": "Super+W", "desc": "Workspaces overview", "category": "System" },
+    { "keys": "Super+F", "desc": "Files", "category": "System" },
+    { "keys": "Super+T", "desc": "Terminal", "category": "System" },
+    { "keys": "Super+Esc", "desc": "Lock screen", "category": "System" },
+    { "keys": "Super+Shift+Esc", "desc": "Log out", "category": "System" },
+    { "keys": "Print", "desc": "Screenshot", "category": "System" },
+    { "keys": "Super+Space", "desc": "Switch input", "category": "System" },
+
+    { "keys": "Super+Alt+S", "desc": "Screen reader", "category": "Accessibility" },
+    { "keys": "Super+Plus", "desc": "Zoom in", "category": "Accessibility" },
+    { "keys": "Super+Minus", "desc": "Zoom out", "category": "Accessibility" }
   ]
 }

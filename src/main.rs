@@ -1,6 +1,9 @@
 mod focus_watcher;
 mod shortcut_resolver;
 mod ui;
+mod key_glyphs;
+mod key_format;
+
 
 use anyhow::Result;
 use shortcut_resolver::ShortcutResolver;

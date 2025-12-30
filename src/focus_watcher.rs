@@ -18,7 +18,7 @@ use cosmic_protocols::toplevel_info::v1::client::{
 
 /// Run the focus watcher and call `on_focus(app_id)` whenever focus changes.
 /// This function blocks forever (Wayland dispatch loop).
-pub fn run_focus_watcher<F>(mut on_focus: F) -> anyhow::Result<()>
+pub fn run_focus_watcher<F>(on_focus: F) -> anyhow::Result<()>
 where
     F: FnMut(String) + Send + 'static,
 {

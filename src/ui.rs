@@ -14,11 +14,11 @@ use tokio::sync::mpsc;
 use crate::focus_watcher;
 use crate::shortcut_resolver::ShortcutResolver;
 
+use crate::key_format::pretty_keys;
+
 // ---------- JSON ----------
 #[derive(Debug, Clone, Deserialize)]
 struct ShortcutsFile {
-    app_id: String,
-    name: String,
     shortcuts: Vec<ShortcutEntry>,
 }
 
@@ -56,22 +56,6 @@ pub struct OrbitKeysUi {
     last_target_app_id: Option<String>,
 }
 
-fn pretty_keys(raw: &str) -> String {
-    raw.replace("Ctrl+", "⌃")
-        .replace("Shift+", "⇧")
-        .replace("Alt+", "⎇")
-        .replace("Super+", "❖")
-        .replace("Cmd+", "⌘")
-        .replace("Tab", "⇥")
-        .replace("Enter", "↵")
-        .replace("Esc", "⎋")
-        .replace("Escape", "⎋")
-        .replace("Backspace", "⌫")
-        .replace("Left", "←")
-        .replace("Right", "→")
-        .replace("Up", "↑")
-        .replace("Down", "↓")
-}
 
 /// Single-line truncation with ellipsis.
 fn ellipsize(s: &str, max_chars: usize) -> String {
@@ -339,7 +323,6 @@ impl Application for OrbitKeysUi {
         let desc_size = 12;
         let desc_max_chars = 22; // tune this as needed (smaller = less chance of overflow)
         let entry_gap = 6;
-        let within_entry_gap = 2;
 
         let mut grid = row()
             .spacing(18)
@@ -363,12 +346,15 @@ impl Application for OrbitKeysUi {
                     // 3) replace spaces with NBSP so it won't wrap
                     let desc_one = no_wrap_spaces(&ellipsize(&desc.replace('\n', " "), desc_max_chars));
 
-                    let entry = column()
-                        .spacing(within_entry_gap)
+
+                    let entry = row()
+                        .spacing(8)
+                        .align_y(Alignment::Center)
                         .push(text(keys_pretty).size(key_size))
                         .push(text(desc_one).size(desc_size));
 
                     cat_block = cat_block.push(entry);
+
                 }
 
                 col_widget = col_widget.push(container(cat_block).padding(6));

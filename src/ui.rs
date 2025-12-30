@@ -3,9 +3,9 @@ use std::fs;
 use std::time::Duration;
 
 use cosmic::app::Core;
-use cosmic::iced::{keyboard, window, Alignment, Fill, Length, Subscription};
+use cosmic::iced::{window, Alignment, Fill, Length, Subscription};
 use cosmic::iced::event::{Event, Status};
-use cosmic::iced::widget::{checkbox, mouse_area};
+use cosmic::iced::widget::mouse_area;
 use cosmic::widget::{button, column, container, row, scrollable, text, text_input, Space};
 use cosmic::{Action, Application, Element, Task};
 
@@ -15,6 +15,18 @@ use tokio::sync::mpsc;
 use crate::focus_watcher;
 use crate::key_format::pretty_keys;
 use crate::shortcut_resolver::ShortcutResolver;
+
+// Cleanup function for lock file (safe even if file doesn't exist)
+fn cleanup_lock_file() {
+    use std::path::PathBuf;
+
+    let runtime_dir = std::env::var("XDG_RUNTIME_DIR")
+        .or_else(|_| std::env::var("TMPDIR"))
+        .unwrap_or_else(|_| "/tmp".to_string());
+
+    let lock_path = PathBuf::from(runtime_dir).join("orbitkeys.lock");
+    let _ = std::fs::remove_file(lock_path);
+}
 
 // ---------- JSON ----------
 #[derive(Debug, Clone, Deserialize)]
@@ -238,6 +250,45 @@ impl OrbitKeysUi {
         .into()
     }
 
+    fn legend_overlay(&self) -> Element<'_, Message> {
+        use crate::key_glyphs::KeyGlyph;
+
+        let mut legend_row = row()
+            .spacing(14)
+            .align_y(Alignment::Center);
+
+        for g in KeyGlyph::LEGEND {
+            let pair: Element<'_, Message> = row()
+                .spacing(6)
+                .align_y(Alignment::Center)
+                .push(text(g.as_str()).size(14))
+                .push(text(g.label()).size(12))
+                .into();
+
+            legend_row = legend_row.push(pair);
+        }
+
+        // bottom-left, flat, no card
+        container(
+            column()
+                .width(Length::Fill)
+                .height(Length::Fill)
+                .push(Space::with_height(Length::Fill))
+                .push(
+                    row()
+                        .width(Length::Fill)
+                        .push(Space::with_width(Length::Fixed(10.0)))
+                        .push(legend_row)
+                        .push(Space::with_width(Length::Fill)),
+                )
+                .push(Space::with_height(Length::Fixed(10.0))),
+        )
+        .width(Length::Fill)
+        .height(Length::Fill)
+        .into()
+    }
+
+
     fn settings_overlay(&self) -> Element<'_, Message> {
         // click-capture layer
         let blocker: Element<'_, Message> = mouse_area(
@@ -350,12 +401,10 @@ impl Application for OrbitKeysUi {
             Message::ToggleSettings => self.show_settings = !self.show_settings,
             Message::CloseSettings => self.show_settings = false,
 
-            Message::GoHome => {
-                // Virtual app_id for COSMIC desktop tiling shortcuts
-                self.set_active_app("root");
-            }
+            Message::GoHome => self.set_active_app("root"),
 
             Message::QuitRequested => {
+                cleanup_lock_file();
                 std::process::exit(0);
             }
         }
@@ -364,18 +413,17 @@ impl Application for OrbitKeysUi {
     }
 
     fn subscription(&self) -> Subscription<Message> {
-        let events = cosmic::iced::event::listen_with(|event, _, _| match event {
+        let close = cosmic::iced::event::listen_with(|event, _, _| match event {
             Event::Window(window::Event::CloseRequested) => {
                 Some((Status::Captured, Message::QuitRequested))
             }
-            Event::Keyboard(keyboard::Event::KeyPressed { .. }) => None,
             _ => None,
         })
         .map(|(_, msg)| msg);
 
         let tick = cosmic::iced::time::every(Duration::from_millis(90)).map(|_| Message::Tick);
 
-        Subscription::batch(vec![events, tick])
+        Subscription::batch(vec![close, tick])
     }
 
     fn view(&self) -> Element<'_, Self::Message> {
@@ -469,12 +517,13 @@ impl Application for OrbitKeysUi {
         if self.show_settings {
             cosmic::iced::widget::stack![
                 main_content,
+                self.legend_overlay(),
                 self.overlay_controls(),
                 self.settings_overlay()
             ]
             .into()
         } else {
-            cosmic::iced::widget::stack![main_content, self.overlay_controls()].into()
+            cosmic::iced::widget::stack![main_content, self.legend_overlay(), self.overlay_controls()].into()
         }
     }
 }

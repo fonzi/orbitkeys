@@ -9,5 +9,4 @@ Icon=xyz.fonzi.orbitkeys
 Terminal=false
 
 Categories=Utility;System;
-StartupWMClass=xyz.fonzi.orbitkeys
 StartupNotify=true

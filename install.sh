@@ -27,8 +27,7 @@ cargo build --release
 
 echo "[orbitkeys] installing binary -> $BIN_PATH"
 mkdir -p "$BIN_DIR"
-cp "$REPO_ROOT/target/release/$BIN_NAME" "$BIN_PATH"
-chmod +x "$BIN_PATH"
+install -m755 "$REPO_ROOT/target/release/$BIN_NAME" "$BIN_PATH"
 
 echo "[orbitkeys] installing shortcuts -> $SHORTCUTS_DST"
 if [ ! -d "$SHORTCUTS_SRC" ]; then
@@ -41,39 +40,29 @@ rm -rf "$SHORTCUTS_DST"
 cp -a "$SHORTCUTS_SRC" "$SHORTCUTS_DST"
 
 echo "[orbitkeys] installing desktop entry -> $DESKTOP_DST"
-mkdir -p "$APP_DIR"
-cp "$DESKTOP_SRC" "$DESKTOP_DST"
-
-# Patch Exec to absolute path so COSMIC can launch it reliably
-sed -i "s|^Exec=.*|Exec=$BIN_PATH|g" "$DESKTOP_DST"
-
-# (Optional) patch TryExec if present
-if grep -q '^TryExec=' "$DESKTOP_DST"; then
-  sed -i "s|^TryExec=.*|TryExec=$BIN_PATH|g" "$DESKTOP_DST"
+if [ ! -f "$DESKTOP_SRC" ]; then
+  echo "ERROR: desktop file not found: $DESKTOP_SRC"
+  exit 1
 fi
+mkdir -p "$APP_DIR"
+install -m644 "$DESKTOP_SRC" "$DESKTOP_DST"
 
 # Install icons
 echo "[orbitkeys] installing icons -> $ICON_DIR"
 if [ -d "$ICONS_SRC" ]; then
-  mkdir -p "$ICON_DIR"
-  
   # Install each icon size to the appropriate directory
   for size in 16 22 24 32 48 64 128 256 512; do
     size_dir="$ICON_DIR/${size}x${size}/apps"
     mkdir -p "$size_dir"
     if [ -f "$ICONS_SRC/orbitkeys-${size}.png" ]; then
-      # Install with both names for compatibility
-      cp "$ICONS_SRC/orbitkeys-${size}.png" "$size_dir/orbitkeys.png"
-      cp "$ICONS_SRC/orbitkeys-${size}.png" "$size_dir/xyz.fonzi.orbitkeys.png"
+      install -m644 "$ICONS_SRC/orbitkeys-${size}.png" "$size_dir/xyz.fonzi.orbitkeys.png"
     fi
   done
-  
-  # Update icon cache
-  gtk-update-icon-cache -f -t "$ICON_DIR" 2>/dev/null || true
 else
   echo "WARNING: icons dir not found: $ICONS_SRC"
 fi
 
+# Optional (harmless) cache refreshes
 update-desktop-database "$APP_DIR" 2>/dev/null || true
 
 echo "[orbitkeys] done"

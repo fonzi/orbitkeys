@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug OrbitKeys",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=orbitkeys"
+                ],
+                "filter": {
+                    "name": "orbitkeys",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "RUST_BACKTRACE": "1",
+                "WAYLAND_DEBUG": "0" 
+            }
+        }
+    ]
+}

@@ -45,4 +45,41 @@ impl KeyGlyph {
             KeyGlyph::Space => "␣",
         }
     }
+
+    pub fn label(self) -> &'static str {
+        match self {
+            KeyGlyph::Ctrl => "Ctrl",
+            KeyGlyph::Shift => "Shift",
+            KeyGlyph::Alt => "Alt",
+            KeyGlyph::Super => "Super",
+
+            KeyGlyph::Tab => "Tab",
+            KeyGlyph::Enter => "Enter",
+            KeyGlyph::Escape => "Esc",
+            KeyGlyph::Backspace => "Backspace",
+
+            KeyGlyph::Left => "Left",
+            KeyGlyph::Right => "Right",
+            KeyGlyph::Up => "Up",
+            KeyGlyph::Down => "Down",
+
+            KeyGlyph::Plus => "Plus",
+            KeyGlyph::Minus => "Minus",
+
+            KeyGlyph::Space => "Space",
+        }
+    }
+
+    // Legend is a *subset* of glyphs, order controlled here.
+    pub const LEGEND: &'static [KeyGlyph] = &[
+        KeyGlyph::Super,
+        KeyGlyph::Ctrl,
+        KeyGlyph::Alt,
+        KeyGlyph::Shift,
+        KeyGlyph::Tab,
+        KeyGlyph::Enter,
+        KeyGlyph::Escape,
+        KeyGlyph::Backspace,
+        KeyGlyph::Space,
+    ];
 }

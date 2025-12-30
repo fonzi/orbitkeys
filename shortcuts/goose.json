@@ -1,0 +1,22 @@
+{
+  "app_id": "goose-desktop",
+  "name": "Goose",
+  "app_ids": [
+    "goose-desktop",
+    "goose",
+    "com.block.goose-desktop"
+  ],
+  "shortcuts": [
+    { "keys": "Ctrl+Alt+Shift+G", "desc": "Quick launcher", "category": "General" },
+    { "keys": "Ctrl+,", "desc": "Settings", "category": "General" },
+    { "keys": "Ctrl+Shift+T", "desc": "Always on top", "category": "View" },
+    { "keys": "Ctrl+B", "desc": "Sidebar", "category": "View" },
+    { "keys": "Ctrl+N", "desc": "New session", "category": "Session" },
+    { "keys": "Ctrl+T", "desc": "New session (win)", "category": "Session" },
+    { "keys": "Ctrl+O", "desc": "Open session", "category": "Session" },
+    { "keys": "Ctrl+F", "desc": "Find", "category": "Search" },
+    { "keys": "Ctrl+G", "desc": "Find next", "category": "Search" },
+    { "keys": "Ctrl+Shift+G", "desc": "Find prev", "category": "Search" },
+    { "keys": "Esc", "desc": "Close search", "category": "Search" }
+  ]
+}

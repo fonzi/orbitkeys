@@ -5,8 +5,9 @@ Version=1.0
 Name=OrbitKeys
 Comment=Context-aware keyboard shortcuts for COSMIC
 Exec=orbitkeys
-Icon=applications-system-symbolic
+Icon=xyz.fonzi.orbitkeys
 Terminal=false
 
 Categories=Utility;System;
+StartupWMClass=xyz.fonzi.orbitkeys
 StartupNotify=true

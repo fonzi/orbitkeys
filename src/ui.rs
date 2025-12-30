@@ -3,18 +3,20 @@ use std::fs;
 use std::time::Duration;
 
 use cosmic::app::Core;
-use cosmic::iced::{keyboard, Alignment, Fill, Subscription};
+use cosmic::iced::{keyboard, Alignment, Fill, Length, Subscription};
 use cosmic::iced::event::{Event, Status};
-use cosmic::widget::{column, container, row, scrollable, text, text_input, Space};
+use cosmic::iced::widget::{checkbox, mouse_area};
+use cosmic::widget::{
+    button, column, container, icon, row, scrollable, text, text_input, Space,
+};
 use cosmic::{Action, Application, Element, Task};
 
 use serde::Deserialize;
 use tokio::sync::mpsc;
 
 use crate::focus_watcher;
-use crate::shortcut_resolver::ShortcutResolver;
-
 use crate::key_format::pretty_keys;
+use crate::shortcut_resolver::ShortcutResolver;
 
 // ---------- JSON ----------
 #[derive(Debug, Clone, Deserialize)]
@@ -38,6 +40,10 @@ pub enum Message {
     AppIdChanged(String),
     SearchChanged(String),
     Tick,
+
+    ToggleSettings,
+    CloseSettings,
+    SemiTransparentToggled(bool),
 }
 
 // ---------- App ----------
@@ -54,8 +60,10 @@ pub struct OrbitKeysUi {
 
     focus_rx: mpsc::UnboundedReceiver<String>,
     last_target_app_id: Option<String>,
-}
 
+    show_settings: bool,
+    semi_transparent: bool,
+}
 
 /// Single-line truncation with ellipsis.
 fn ellipsize(s: &str, max_chars: usize) -> String {
@@ -81,7 +89,6 @@ fn ellipsize(s: &str, max_chars: usize) -> String {
 }
 
 /// Prevent wrapping by replacing spaces with NBSP.
-/// This keeps it visually single-line inside narrow columns (it will clip/truncate instead of wrap).
 fn no_wrap_spaces(s: &str) -> String {
     s.replace(' ', "\u{00A0}")
 }
@@ -170,7 +177,9 @@ impl OrbitKeysUi {
             latest = Some(v);
         }
 
-        let Some(app_id) = latest else { return };
+        let Some(app_id) = latest else {
+            return;
+        };
 
         if app_id == Self::APP_ID {
             return;
@@ -188,6 +197,89 @@ impl OrbitKeysUi {
         self.last_target_app_id = Some(app_id.clone());
         self.app_id_text = app_id.clone();
         self.load_for_app_id(&app_id);
+    }
+
+    fn gear_overlay(&self) -> Element<'_, Message> {
+        container(
+            column()
+                .width(Length::Fill)
+                .height(Length::Fill)
+                .push(Space::with_height(Length::Fill))
+                .push(
+                    row()
+                        .width(Length::Fill)
+                        .push(Space::with_width(Length::Fill))
+                        .push(
+                            button::text("⚙")
+                                .class(cosmic::theme::Button::Icon)
+                                .on_press(Message::ToggleSettings),
+                        )
+                        .push(Space::with_width(Length::Fixed(8.0))),
+                )
+                .push(Space::with_height(Length::Fixed(8.0))),
+        )
+        .width(Length::Fill)
+        .height(Length::Fill)
+        .into()
+    }
+
+    fn settings_overlay(&self) -> Element<'_, Message> {
+        // 1) Full-window click-capture layer (blocks underlying UI)
+        let blocker: Element<'_, Message> = mouse_area(
+            container(Space::new(Length::Fill, Length::Fill))
+                .width(Length::Fill)
+                .height(Length::Fill),
+        )
+        .on_press(Message::CloseSettings)
+        .into();
+
+        // 2) Panel content (COSMIC themed; no custom colors)
+        let panel_content = column()
+            .spacing(12)
+            .push(text("Settings").size(20))
+            .push(
+                checkbox("Semi-transparent", self.semi_transparent)
+                    .on_toggle(Message::SemiTransparentToggled),
+            )
+            .push(Space::with_height(Length::Fixed(6.0)))
+            .push(text("Maintainer").size(16))
+            .push(text("fonzi.xyz").size(14))
+            .push(Space::with_height(Length::Fixed(10.0)))
+            .push(
+                row()
+                    .width(Length::Fill)
+                    .push(Space::with_width(Length::Fill))
+                    .push(
+                        // COSMIC-styled button (instead of iced::widget::button)
+                        button::text("Close").on_press(Message::CloseSettings),
+                    ),
+            );
+
+        // If Container::Card doesn't compile in your libcosmic version, remove `.class(...)`.
+        let panel = container(panel_content)
+            .padding(18)
+            .width(Length::Fixed(360.0))
+            .class(cosmic::theme::Container::Card);
+
+        // Centered panel (layout-only)
+        let centered = container(
+            column()
+                .width(Length::Fill)
+                .height(Length::Fill)
+                .push(Space::with_height(Length::Fill))
+                .push(
+                    row()
+                        .width(Length::Fill)
+                        .push(Space::with_width(Length::Fill))
+                        .push(panel)
+                        .push(Space::with_width(Length::Fill)),
+                )
+                .push(Space::with_height(Length::Fill)),
+        )
+        .width(Length::Fill)
+        .height(Length::Fill);
+
+        cosmic::iced::widget::stack![blocker, centered].into()
     }
 }
 
@@ -225,6 +317,8 @@ impl Application for OrbitKeysUi {
                 load_error: None,
                 focus_rx: rx,
                 last_target_app_id: None,
+                show_settings: false,
+                semi_transparent: false,
             },
             Task::none(),
         )
@@ -243,6 +337,10 @@ impl Application for OrbitKeysUi {
             }
             Message::SearchChanged(v) => self.search = v,
             Message::Tick => self.drain_focus_updates(),
+
+            Message::ToggleSettings => self.show_settings = !self.show_settings,
+            Message::CloseSettings => self.show_settings = false,
+            Message::SemiTransparentToggled(v) => self.semi_transparent = v,
         }
         Task::none()
     }
@@ -294,99 +392,76 @@ impl Application for OrbitKeysUi {
                     .width(Fill),
             );
 
-        if self.items.is_empty() && self.load_error.is_none() {
-            return container(
-                column()
-                    .spacing(16)
-                    .width(Fill)
-                    .height(Fill)
-                    .push(header)
-                    .push(search_row)
-                    .push(
-                        container(text("Focus an app to load shortcuts.").size(14))
-                            .padding(16)
-                            .width(Fill)
-                            .height(Fill),
-                    ),
-            )
-            .padding(16)
-            .width(Fill)
-            .height(Fill)
-            .into();
-        }
-
-        let cols = self.grouped_columns(5);
-
-        // Key bigger, desc directly UNDER it, single-line (truncate + NBSP to prevent wrapping).
-        // Bold: libcosmic/iced text weight API varies by version; size + glyphs gets most of the effect.
-        let key_size = 16;
-        let desc_size = 12;
-        let desc_max_chars = 22; // tune this as needed (smaller = less chance of overflow)
-        let entry_gap = 6;
-
-        let mut grid = row()
-            .spacing(18)
-            .width(Fill)
-            .align_y(Alignment::Start);
-
-        for col in cols {
-            let mut col_widget = column().spacing(10).width(Fill);
-
-            for (category, entries) in col {
-                let mut cat_block = column()
-                    .spacing(entry_gap)
-                    .push(text(category).size(18));
-
-                for (keys, desc) in entries {
-                    let keys_pretty = pretty_keys(&keys);
-
-                    // Force a single visual line:
-                    // 1) remove newlines
-                    // 2) ellipsize
-                    // 3) replace spaces with NBSP so it won't wrap
-                    let desc_one = no_wrap_spaces(&ellipsize(&desc.replace('\n', " "), desc_max_chars));
-
-
-                    let entry = row()
-                        .spacing(8)
-                        .align_y(Alignment::Center)
-                        .push(text(keys_pretty).size(key_size))
-                        .push(text(desc_one).size(desc_size));
-
-                    cat_block = cat_block.push(entry);
-
-                }
-
-                col_widget = col_widget.push(container(cat_block).padding(6));
-            }
-
-            grid = grid.push(col_widget);
-        }
-
-        let body: Element<'_, Self::Message> = if let Some(err) = &self.load_error {
+        let main_body: Element<'_, Message> = if self.items.is_empty() && self.load_error.is_none() {
+            container(text("Focus an app to load shortcuts.").size(14))
+                .padding(16)
+                .width(Fill)
+                .height(Fill)
+                .into()
+        } else if let Some(err) = &self.load_error {
             container(text(err).size(14))
                 .padding(16)
                 .width(Fill)
                 .height(Fill)
                 .into()
         } else {
-            scrollable(container(grid).width(Fill))
-                .height(Fill)
-                .into()
+            let cols = self.grouped_columns(5);
+
+            let key_size = 16;
+            let desc_size = 12;
+            let desc_max_chars = 26;
+            let entry_gap = 6;
+
+            let mut grid = row().spacing(18).width(Fill).align_y(Alignment::Start);
+
+            for col in cols {
+                let mut col_widget = column().spacing(10).width(Fill);
+
+                for (category, entries) in col {
+                    let mut cat_block = column().spacing(entry_gap).push(text(category).size(18));
+
+                    for (keys, desc) in entries {
+                        let keys_pretty = pretty_keys(&keys);
+                        let desc_one =
+                            no_wrap_spaces(&ellipsize(&desc.replace('\n', " "), desc_max_chars));
+
+                        let entry = row()
+                            .spacing(8)
+                            .align_y(Alignment::Center)
+                            .push(text(keys_pretty).size(key_size))
+                            .push(text(desc_one).size(desc_size));
+
+                        cat_block = cat_block.push(entry);
+                    }
+
+                    col_widget = col_widget.push(container(cat_block).padding(6));
+                }
+
+                grid = grid.push(col_widget);
+            }
+
+            scrollable(container(grid).width(Fill)).height(Fill).into()
         };
 
-        container(
+        let main_content: Element<'_, Message> = container(
             column()
                 .spacing(14)
                 .width(Fill)
                 .height(Fill)
                 .push(header)
                 .push(search_row)
-                .push(body),
+                .push(main_body),
         )
         .padding(16)
         .width(Fill)
         .height(Fill)
-        .into()
+        .into();
+
+        if self.show_settings {
+            cosmic::iced::widget::stack![main_content, self.gear_overlay(), self.settings_overlay()]
+                .into()
+        } else {
+            cosmic::iced::widget::stack![main_content, self.gear_overlay()].into()
+        }
     }
 }

@@ -22,7 +22,6 @@
     { "keys": "Super+Shift+Arrows", "desc": "Move window", "category": "Movement" },
     { "keys": "Super+Shift+Alt+Arrows", "desc": "Move to display", "category": "Movement" },
     { "keys": "Super+Shift+Ctrl+Arrows", "desc": "Move to workspace", "category": "Movement" },
-    { "keys": "Super+Shift+1-9", "desc": "Move to workspace 1-9", "category": "Movement" },
 
     { "keys": "Super+Q", "desc": "Close", "category": "Windows" },
     { "keys": "Super+M", "desc": "Maximize", "category": "Windows" },

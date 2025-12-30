@@ -1,9 +1,16 @@
 {
   "app_id": "code",
   "name": "Visual Studio Code",
+  "app_ids": [
+    "code",
+    "code-url-handler",
+    "com.visualstudio.code"
+  ],
   "shortcuts": [
-    { "keys": "Ctrl+Shift+P", "desc": "Command Palette" },
-    { "keys": "Ctrl+P", "desc": "Quick Open File" },
-    { "keys": "Ctrl+B", "desc": "Toggle Sidebar" }
+    { "keys": "Ctrl+Shift+P", "desc": "Open Command Palette", "category": "General" },
+    { "keys": "Ctrl+P", "desc": "Quick Open File", "category": "Navigation" },
+    { "keys": "Ctrl+B", "desc": "Toggle Sidebar", "category": "View" },
+    { "keys": "Ctrl+Shift+N", "desc": "New Window", "category": "Window" },
+    { "keys": "Ctrl+`", "desc": "Toggle Integrated Terminal", "category": "Terminal" }
   ]
 }

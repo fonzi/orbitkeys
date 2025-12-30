@@ -1,0 +1,116 @@
+{
+  "app_id": "firefox",
+  "name": "Mozilla Firefox",
+  "app_ids": [
+    "firefox",
+    "firefox-esr",
+    "org.mozilla.firefox"
+  ],
+  "shortcuts": [
+    {
+      "keys": "Ctrl+L",
+      "desc": "Focus address bar",
+      "category": "Navigation"
+    },
+    {
+      "keys": "Ctrl+T",
+      "desc": "New tab",
+      "category": "Tabs"
+    },
+    {
+      "keys": "Ctrl+W",
+      "desc": "Close current tab",
+      "category": "Tabs"
+    },
+    {
+      "keys": "Ctrl+Shift+T",
+      "desc": "Reopen closed tab",
+      "category": "Tabs"
+    },
+    {
+      "keys": "Ctrl+Tab",
+      "desc": "Switch to next tab",
+      "category": "Tabs"
+    },
+    {
+      "keys": "Ctrl+Shift+Tab",
+      "desc": "Switch to previous tab",
+      "category": "Tabs"
+    },
+    {
+      "keys": "Ctrl+F",
+      "desc": "Find in page",
+      "category": "Search"
+    },
+    {
+      "keys": "Ctrl+Shift+F",
+      "desc": "Find across all tabs",
+      "category": "Search"
+    },
+    {
+      "keys": "Ctrl+R",
+      "desc": "Reload page",
+      "category": "Navigation"
+    },
+    {
+      "keys": "Ctrl+Shift+R",
+      "desc": "Reload page (ignore cache)",
+      "category": "Navigation"
+    },
+    {
+      "keys": "Ctrl+D",
+      "desc": "Bookmark current page",
+      "category": "Bookmarks"
+    },
+    {
+      "keys": "Ctrl+Shift+B",
+      "desc": "Toggle bookmarks toolbar",
+      "category": "Bookmarks"
+    },
+    {
+      "keys": "Ctrl+H",
+      "desc": "Open history sidebar",
+      "category": "Sidebar"
+    },
+    {
+      "keys": "Ctrl+B",
+      "desc": "Open bookmarks sidebar",
+      "category": "Sidebar"
+    },
+    {
+      "keys": "Ctrl+Shift+A",
+      "desc": "Open Add-ons Manager",
+      "category": "Tools"
+    },
+    {
+      "keys": "Ctrl+Shift+I",
+      "desc": "Open Developer Tools",
+      "category": "Developer"
+    },
+    {
+      "keys": "F12",
+      "desc": "Toggle Developer Tools",
+      "category": "Developer"
+    },
+    {
+      "keys": "Ctrl+Plus",
+      "desc": "Zoom in",
+      "category": "View"
+    },
+    {
+      "keys": "Ctrl+Minus",
+      "desc": "Zoom out",
+      "category": "View"
+    },
+    {
+      "keys": "Ctrl+0",
+      "desc": "Reset zoom",
+      "category": "View"
+    },
+    {
+      "keys": "Ctrl+Shift+P",
+      "desc": "Open Private Browsing window",
+      "category": "Window"
+    }
+  ]
+}

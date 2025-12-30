@@ -4,14 +4,18 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-# Official COSMIC Protocols
+libcosmic = { git = "https://github.com/pop-os/libcosmic", features = ["tokio", "winit", "wgpu"] }
+
+tokio = { version = "1.37", features = ["rt-multi-thread", "macros", "sync", "time"] }
+
 cosmic-protocols = { git = "https://github.com/pop-os/cosmic-protocols", features = ["client"] }
-
-# Standard Wayland Staging
 wayland-protocols = { version = "0.32", features = ["client", "staging"] }
-
-# Core Wayland
 wayland-client = "0.31"
 wayland-backend = "0.3"
 
 anyhow = "1.0"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[dependencies.web-sys]
+version = "0.3.83"

@@ -56,9 +56,53 @@ pub struct OrbitKeysUi {
     last_target_app_id: Option<String>,
 }
 
-impl OrbitKeysUi {
-    // ---------- data helpers ----------
+fn pretty_keys(raw: &str) -> String {
+    raw.replace("Ctrl+", "⌃")
+        .replace("Shift+", "⇧")
+        .replace("Alt+", "⎇")
+        .replace("Super+", "❖")
+        .replace("Cmd+", "⌘")
+        .replace("Tab", "⇥")
+        .replace("Enter", "↵")
+        .replace("Esc", "⎋")
+        .replace("Escape", "⎋")
+        .replace("Backspace", "⌫")
+        .replace("Left", "←")
+        .replace("Right", "→")
+        .replace("Up", "↑")
+        .replace("Down", "↓")
+}
 
+/// Single-line truncation with ellipsis.
+fn ellipsize(s: &str, max_chars: usize) -> String {
+    let s = s.trim();
+    if max_chars == 0 {
+        return String::new();
+    }
+    let count = s.chars().count();
+    if count <= max_chars {
+        return s.to_string();
+    }
+
+    let keep = max_chars.saturating_sub(1);
+    let mut out = String::with_capacity(max_chars);
+    for (i, ch) in s.chars().enumerate() {
+        if i >= keep {
+            break;
+        }
+        out.push(ch);
+    }
+    out.push('…');
+    out
+}
+
+/// Prevent wrapping by replacing spaces with NBSP.
+/// This keeps it visually single-line inside narrow columns (it will clip/truncate instead of wrap).
+fn no_wrap_spaces(s: &str) -> String {
+    s.replace(' ', "\u{00A0}")
+}
+
+impl OrbitKeysUi {
     fn filtered_items(&self) -> Vec<(String, String, String)> {
         let q = self.search.trim().to_lowercase();
         if q.is_empty() {
@@ -78,21 +122,14 @@ impl OrbitKeysUi {
 
     fn grouped_items(&self) -> BTreeMap<String, Vec<(String, String)>> {
         let mut map: BTreeMap<String, Vec<(String, String)>> = BTreeMap::new();
-
         for (keys, desc, cat) in self.filtered_items() {
             map.entry(cat).or_default().push((keys, desc));
         }
-
         map
     }
 
-    /// Distribute categories into N vertical columns (top-to-bottom, left-to-right)
-    fn grouped_columns(
-        &self,
-        max_cols: usize,
-    ) -> Vec<Vec<(String, Vec<(String, String)>)>> {
+    fn grouped_columns(&self, max_cols: usize) -> Vec<Vec<(String, Vec<(String, String)>)>> {
         let grouped = self.grouped_items();
-
         let mut cols: Vec<Vec<(String, Vec<(String, String)>)>> =
             (0..max_cols).map(|_| Vec::new()).collect();
 
@@ -102,8 +139,6 @@ impl OrbitKeysUi {
 
         cols
     }
-
-    // ---------- loading ----------
 
     fn load_for_app_id(&mut self, app_id: &str) {
         self.items.clear();
@@ -172,7 +207,6 @@ impl OrbitKeysUi {
     }
 }
 
-// ---------- Application ----------
 impl Application for OrbitKeysUi {
     const APP_ID: &'static str = "com.fonzi.orbitkeys";
 
@@ -197,19 +231,19 @@ impl Application for OrbitKeysUi {
             });
         });
 
-        let mut app = Self {
-            core,
-            resolver,
-            app_id_text: "firefox".into(),
-            search: String::new(),
-            items: Vec::new(),
-            load_error: None,
-            focus_rx: rx,
-            last_target_app_id: Some("firefox".into()),
-        };
-
-        app.load_for_app_id("firefox");
-        (app, Task::none())
+        (
+            Self {
+                core,
+                resolver,
+                app_id_text: String::new(),
+                search: String::new(),
+                items: Vec::new(),
+                load_error: None,
+                focus_rx: rx,
+                last_target_app_id: None,
+            },
+            Task::none(),
+        )
     }
 
     fn update(&mut self, message: Self::Message) -> Task<Action<Self::Message>> {
@@ -218,8 +252,10 @@ impl Application for OrbitKeysUi {
             Message::AppIdChanged(v) => {
                 self.app_id_text = v;
                 let id = self.app_id_text.trim().to_string();
-                self.last_target_app_id = Some(id.clone());
-                self.load_for_app_id(&id);
+                if !id.is_empty() {
+                    self.last_target_app_id = Some(id.clone());
+                    self.load_for_app_id(&id);
+                }
             }
             Message::SearchChanged(v) => self.search = v,
             Message::Tick => self.drain_focus_updates(),
@@ -246,71 +282,116 @@ impl Application for OrbitKeysUi {
         })
         .map(|(_, msg)| msg);
 
-        let tick =
-            cosmic::iced::time::every(Duration::from_millis(80)).map(|_| Message::Tick);
+        let tick = cosmic::iced::time::every(Duration::from_millis(90)).map(|_| Message::Tick);
 
         Subscription::batch(vec![hotkey, tick])
     }
 
     fn view(&self) -> Element<'_, Self::Message> {
         let header = row()
-            .spacing(12)
+            .spacing(10)
             .align_y(Alignment::Center)
-            .push(text("OrbitKeys").size(28))
-            .push(Space::with_width(16))
-            .push(text("App ID:").size(14))
+            .push(text("OrbitKeys").size(26))
+            .push(Space::with_width(12))
+            .push(text("App ID:").size(13))
             .push(
                 text_input("focused app id…", &self.app_id_text)
                     .on_input(Message::AppIdChanged)
-                    .width(240),
+                    .width(220),
             );
 
         let search_row = row()
-            .spacing(12)
+            .spacing(10)
             .align_y(Alignment::Center)
-            .push(text("Search:").size(14))
+            .push(text("Search:").size(13))
             .push(
                 text_input("type to filter…", &self.search)
                     .on_input(Message::SearchChanged)
                     .width(Fill),
             );
 
-        let cols = self.grouped_columns(3);
+        if self.items.is_empty() && self.load_error.is_none() {
+            return container(
+                column()
+                    .spacing(16)
+                    .width(Fill)
+                    .height(Fill)
+                    .push(header)
+                    .push(search_row)
+                    .push(
+                        container(text("Focus an app to load shortcuts.").size(14))
+                            .padding(16)
+                            .width(Fill)
+                            .height(Fill),
+                    ),
+            )
+            .padding(16)
+            .width(Fill)
+            .height(Fill)
+            .into();
+        }
+
+        let cols = self.grouped_columns(5);
+
+        // Key bigger, desc directly UNDER it, single-line (truncate + NBSP to prevent wrapping).
+        // Bold: libcosmic/iced text weight API varies by version; size + glyphs gets most of the effect.
+        let key_size = 16;
+        let desc_size = 12;
+        let desc_max_chars = 22; // tune this as needed (smaller = less chance of overflow)
+        let entry_gap = 6;
+        let within_entry_gap = 2;
 
         let mut grid = row()
-            .spacing(32)
+            .spacing(18)
             .width(Fill)
             .align_y(Alignment::Start);
 
         for col in cols {
-            let mut col_widget = column().spacing(18).width(Fill);
+            let mut col_widget = column().spacing(10).width(Fill);
 
             for (category, entries) in col {
                 let mut cat_block = column()
-                    .spacing(10)
-                    .push(text(category).size(16));
+                    .spacing(entry_gap)
+                    .push(text(category).size(18));
 
                 for (keys, desc) in entries {
-                    cat_block = cat_block.push(
-                        row()
-                            .spacing(12)
-                            .align_y(Alignment::Center)
-                            .push(text(keys).size(14).width(170))
-                            .push(text(desc).size(14).width(Fill)),
-                    );
+                    let keys_pretty = pretty_keys(&keys);
+
+                    // Force a single visual line:
+                    // 1) remove newlines
+                    // 2) ellipsize
+                    // 3) replace spaces with NBSP so it won't wrap
+                    let desc_one = no_wrap_spaces(&ellipsize(&desc.replace('\n', " "), desc_max_chars));
+
+                    let entry = column()
+                        .spacing(within_entry_gap)
+                        .push(text(keys_pretty).size(key_size))
+                        .push(text(desc_one).size(desc_size));
+
+                    cat_block = cat_block.push(entry);
                 }
 
-                col_widget = col_widget.push(container(cat_block).padding(12));
+                col_widget = col_widget.push(container(cat_block).padding(6));
             }
 
             grid = grid.push(col_widget);
         }
 
-        let body = scrollable(container(grid).width(Fill)).height(Fill);
+        let body: Element<'_, Self::Message> = if let Some(err) = &self.load_error {
+            container(text(err).size(14))
+                .padding(16)
+                .width(Fill)
+                .height(Fill)
+                .into()
+        } else {
+            scrollable(container(grid).width(Fill))
+                .height(Fill)
+                .into()
+        };
 
         container(
             column()
-                .spacing(16)
+                .spacing(14)
                 .width(Fill)
                 .height(Fill)
                 .push(header)
